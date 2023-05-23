@@ -6,13 +6,12 @@ using UnityEngine.InputSystem;
 using OmegaStudio.Core.Patterns.Singleton;
 
 [DefaultExecutionOrder(-1)]
-public class InputManagerAR : MonoBehaviour
+public class InputManagerAR : Singleton<InputManagerAR>
 {
     public delegate void StartTouchEvent(Vector2 position, float time);
     public event StartTouchEvent OnStartTouch;
     public delegate void EndTouchEvent(Vector2 position, float time);
     public event EndTouchEvent OnEndTouch;
-
 
     private InputAction_AR inputAction_AR;
 
