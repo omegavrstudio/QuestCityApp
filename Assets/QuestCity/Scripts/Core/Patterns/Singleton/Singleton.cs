@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace OmegaStudio.Core.Patterns.Singleton
+namespace OmegaStudio.Core.Patterns
 {
     public class Singleton<T> : MonoBehaviour
        where T : Component

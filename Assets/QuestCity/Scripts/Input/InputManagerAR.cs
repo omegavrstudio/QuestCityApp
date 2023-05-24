@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem.Controls;
 using UnityEngine.InputSystem;
-using OmegaStudio.Core.Patterns.Singleton;
+using OmegaStudio.Core.Patterns;
 
 [DefaultExecutionOrder(-1)]
 public class InputManagerAR : Singleton<InputManagerAR>
