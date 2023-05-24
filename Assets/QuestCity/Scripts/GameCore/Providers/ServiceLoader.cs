@@ -9,6 +9,7 @@ public class ServiceLoader : MonoBehaviour
 {
     [SerializeField] private NotificationService _notificationService;
     [SerializeField] private CityStatisticService _cityStatisticService;
+    [SerializeField] private SoundService _soundService;
 
     private void Awake()
     {
@@ -21,5 +22,6 @@ public class ServiceLoader : MonoBehaviour
     {
         ServiceLocator.Current.Register<INotificationService>(_notificationService);
         ServiceLocator.Current.Register<ICityStatisticsService>(_cityStatisticService);
+        ServiceLocator.Current.Register<ISoundService>(_soundService);
     }
 }
