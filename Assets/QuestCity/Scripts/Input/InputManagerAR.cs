@@ -38,7 +38,6 @@ public class InputManagerAR : Singleton<InputManagerAR>
 
     private void StartTouch(InputAction.CallbackContext context)
     {
-        Debug.Log("Touch" + inputAction_AR.Touch.TouchPosition.ReadValue<Vector2>());
         if(OnStartTouch != null)
         {
             OnStartTouch(inputAction_AR.Touch.TouchPosition.ReadValue<Vector2>(), (float)context.startTime);
@@ -47,7 +46,6 @@ public class InputManagerAR : Singleton<InputManagerAR>
 
     private void EndTouch(InputAction.CallbackContext context)
     {
-        Debug.Log("Touch End");
         if (OnEndTouch != null)
         {
             OnEndTouch(inputAction_AR.Touch.TouchPosition.ReadValue<Vector2>(), (float)context.startTime);
