@@ -16,7 +16,6 @@ public class PlaceOnPlane : MonoBehaviour
     [SerializeField]
     private GameObject _visualIndicator;
     private ARRaycastManager _raycastManager;
-    bool m_Pressed;
 
     public GameObject PlacedObject
     {
@@ -28,54 +27,19 @@ public class PlaceOnPlane : MonoBehaviour
 
     private List<ARRaycastHit> _hitList = new List<ARRaycastHit>();
 
-
     private void Awake()
     {
         _raycastManager = GetComponent<ARRaycastManager>();
-
-        if (PlacementUpdate == null)
-        {
-            PlacementUpdate = new UnityEvent();
-
-            PlacementUpdate.AddListener(DisableView);
-        }
+        InputManagerAR.Instance.OnStartTouch += Instance_OnStartTouch;
     }
 
-    bool TryGetTouchPosition(out Vector2 touchPosition)
+    private void Instance_OnStartTouch(Vector2 position, float time)
     {
-        if (Input.touchCount > 0)
-        {
-            touchPosition = Input.GetTouch(0).position;
-            return true;
-        }
-
-        touchPosition = default;
-        return false;
-    }
-
-    void Update()
-    {
-        if (!TryGetTouchPosition(out Vector2 touchPosition))
-            return;
-
-        if (_raycastManager.Raycast(touchPosition, _hitList, TrackableType.PlaneWithinPolygon))
+        if (_raycastManager.Raycast(position, _hitList, TrackableType.Planes))
         {
             var hitPose = _hitList[0].pose;
 
-            if (spawnedObject != null)
-            {
-                spawnedObject = Instantiate(PlacedObject, hitPose.position, hitPose.rotation);
-            }
-            else
-            {
-                spawnedObject.transform.position = hitPose.position;
-            }
-            PlacementUpdate.Invoke();
+            Instantiate(PlacedObject, hitPose.position, hitPose.rotation);
         }
-    }
-
-    public void DisableView()
-    {
-        _visualIndicator.SetActive(false);
     }
 }
