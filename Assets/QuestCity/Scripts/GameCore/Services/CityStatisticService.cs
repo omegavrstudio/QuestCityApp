@@ -3,29 +3,58 @@ using System.Collections.Generic;
 using UnityEngine;
 using QuestCity.GameCore.Structures;
 using QuestCity.GameCore.Base;
+using QuestCity.Core.Patterns;
 
 namespace QuestCity.GameCore.Services
 {
     public class CityStatisticService : ServiceBase, ICityStatisticsService
     {
-        private CityStatisticStruct statisticStruct;
+        private CityStatisticProvider cityStatistic;
 
-        private void Awake()
+        protected override void Awake()
         {
-            if(GetCacheStatistic(out CityStatisticStruct cityStatisticStruct))
-            {
-                statisticStruct = cityStatisticStruct;
-            }
-            else
-            {
-                statisticStruct = new CityStatisticStruct();
-            }
+            base.Awake();
+            cityStatistic = FindAnyObjectByType<CityStatisticProvider>();
         }
 
-        private bool GetCacheStatistic(out CityStatisticStruct cityStatisticStruct)
+        protected override void Start()
         {
-            cityStatisticStruct = new CityStatisticStruct();
-            return true;
+            base.Start();
+        }
+
+        public virtual CityStatisticStruct GetStatistic()
+        {
+            return cityStatistic.CityStatistics;
+        }
+
+        public virtual void AddCoin()
+        {
+            cityStatistic.AddCoin();
+        }
+
+        public virtual void AddPeople()
+        {
+            cityStatistic.AddPeople();
+        }
+
+        public virtual void AddBuildings()
+        {
+            cityStatistic.AddBuildings();
+        }
+
+        public virtual void AddRegions()
+        {
+            cityStatistic.AddRegions();
+        }
+
+        public virtual void AddHappy()
+        {
+            cityStatistic.AddHappy();
+        }
+
+        public virtual void AddUniqueBuildings()
+        {
+            cityStatistic.AddUniqueBuildings();
         }
     }
 }

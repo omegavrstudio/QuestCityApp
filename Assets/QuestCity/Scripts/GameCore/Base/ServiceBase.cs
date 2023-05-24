@@ -7,12 +7,12 @@ namespace QuestCity.GameCore.Base
 {
     public class ServiceBase : MonoBehaviour, IService
     {
-        private void Awake()
+        protected virtual void Awake()
         {
             
         }
 
-        private void Start()
+        protected virtual void Start()
         {
             
         }
