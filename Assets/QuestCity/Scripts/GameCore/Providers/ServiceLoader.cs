@@ -1,4 +1,5 @@
 using QuestCity.Core.Patterns;
+using QuestCity.GameCore.Interfaces;
 using QuestCity.GameCore.Services;
 using System.Collections;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ public class ServiceLoader : MonoBehaviour
 
     private void InitializationServices()
     {
-        ServiceLocator.Current.Register<NotificationService>(_notificationService);
-        ServiceLocator.Current.Register<CityStatisticService>(_cityStatisticService);
+        ServiceLocator.Current.Register<INotificationService>(_notificationService);
+        ServiceLocator.Current.Register<ICityStatisticsService>(_cityStatisticService);
     }
 }
